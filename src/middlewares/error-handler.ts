@@ -1,6 +1,6 @@
 import { AppError } from "@/utils/AppError.js";
 import { Request, Response, NextFunction } from "express";
-import { ZodError } from "zod";
+import z, { ZodError } from "zod";
 
 export function errorHandler(
   error: any,
@@ -13,7 +13,9 @@ export function errorHandler(
   }
 
   if (error instanceof ZodError) {
-    res.status(401).json({ message: "validate error", issue: error.format });
+    res
+      .status(401)
+      .json({ message: "validate error", issue: z.formatError(error) });
   }
 
   res.status(500).json({ message: error.message });

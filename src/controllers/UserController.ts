@@ -1,14 +1,12 @@
-import { UserCreateSchema } from "@/schemas/user-create-schemas.js";
 import { Request, Response } from "express";
 import { hash } from "bcrypt";
 import { prisma } from "@/db/prisma.js";
 import { AppError } from "@/utils/AppError.js";
+import { createUserSchema } from "@/schemas/user-create-schemas.js";
 
 export class UserController {
   async create(req: Request, res: Response) {
-    const body: UserCreateSchema = req.body;
-
-    const { username, email, password } = body;
+    const { username, email, password } = createUserSchema.parse(req.body);
 
     const user = await prisma.user.findFirst({
       where: {
