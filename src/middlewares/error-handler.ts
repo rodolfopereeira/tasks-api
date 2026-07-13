@@ -19,4 +19,5 @@ export function errorHandler(
   }
 
   res.status(500).json({ message: error.message });
+  next();
 }
