@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { hash } from "bcrypt";
-import { prisma } from "@/db/prisma.js";
+import { prisma } from "@/database/prisma.js";
 import { AppError } from "@/utils/AppError.js";
 import { createUserSchema } from "@/schemas/user-create-schemas.js";
 
